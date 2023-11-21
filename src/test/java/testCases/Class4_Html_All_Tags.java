@@ -7,7 +7,7 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
-public class Class4_Html_allTags {
+public class Class4_Html_All_Tags {
 
 	public static void main(String[] args) throws InterruptedException {
 		String chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
@@ -41,7 +41,8 @@ public class Class4_Html_allTags {
 		page.goBack();
 		Thread.sleep(3000);
 		page.locator("//a[text()='Embedded content']").click();
-		
+		Thread.sleep(3000);
+		page.goBack();
 
 	}
 

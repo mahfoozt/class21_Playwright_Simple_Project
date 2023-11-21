@@ -1,6 +1,8 @@
 package testCases;
 
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
@@ -24,9 +26,10 @@ public class Key_Down_htmlpage {
 				.launch(new BrowserType.LaunchOptions().setHeadless(false).setExecutablePath(Paths.get(chromePath)));
 		Page page;
 		page = browser.newPage();
-		
-		page.navigate("file:///C:/Java/html-form-page.html");
+		page.navigate("file:///C:/Java/SDET_Class/html-form-page.html");
 		Thread.sleep(1000);
+//		ArrayList <String> argument= new ArrayList<>();
+//		argument.add("--start-maximized");
 		page.locator("#input__text").click();
 		Thread.sleep(1000);
 		page.locator("#input__text").fill("mahfooz");
@@ -44,13 +47,18 @@ public class Key_Down_htmlpage {
 		page.locator("//input[@id='input__search']").fill("Flower");
 		Thread.sleep(2000);
 		page.locator("//input[@id='input__text2']").fill("2");
+		//attach file
 		Thread.sleep(1000);
+		//page.locator("//input[@id='input__file']").click();
 		//page.locator("//input[@id='input__file']").setInputFiles(Paths.get("./src/test/resources/files/rosylogo.png"));
 		page.setInputFiles("//input[@id='input__file']", Paths.get("./src/test/resources/files/rosylogo.png"));
 		Thread.sleep(1000);
 		page.locator("//select[@id='select']").click();
+		//screen shot
 		Thread.sleep(1000);
-		page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("./src/test/resources/files/PicKeyDown.png")));
+		page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("./target/Snap_Shot_Folder/Html_Page.png")));
+		Thread.sleep(1000);
+		
 		SelectOption sp;
 		sp = new SelectOption();
 		page.selectOption("Select", sp.setLabel("Option Two"));
@@ -71,8 +79,22 @@ public class Key_Down_htmlpage {
 		page.locator("//textarea[@id='textarea']")
 				.fill("Hello everyone, this is Mahfooz. I am working as an intern at Michro Tech.");
 		Thread.sleep(1000);
-		page.locator("//input[@id='ic']").click();
-		Thread.sleep(5000);
+		//Select Multiple
+		String[] multSelectionValues =  {"Option One", "Option Three"};
+		page.selectOption("//select[@id='select_multiple']", multSelectionValues);
+		
+		//Select Animal
+		//page.selectOption("//select[@id='select_animal']", "Cat");
+
+		//page.locator("//input[@id='ic']").click();
+		Locator element=page.locator("#ic").first();
+		String actualColor=(String)element.evaluate("e1=> getComputedStyle(e1).color");
+		String expectedColor="rgb(0, 0, 0)";
+		if(actualColor.equals(expectedColor)) {
+			System.out.println("Color is as expected: "+actualColor);
+		}else {
+			System.out.println("Color is no as expected: "+actualColor);
+		}
 		//page.locator("//input[@id='ic']").fill("#00FF00");
 		page.locator("//input[@id='in']").click();
 		Thread.sleep(2000);
@@ -104,6 +126,51 @@ public class Key_Down_htmlpage {
 		Thread.sleep(1000);
 		page.locator("//input[@id='idl']").click();
 		Thread.sleep(3000);
+		//data list 
+		String inputSelector="//input[@id='idl']";
+		page.fill(inputSelector,"Example #2");
+		//Date Input
+		//LocalDate currentDate =LocalDate.now();
+	
+		//find text in 3rt Row and 2 col
+		//System.out.println( page.locator("//tr[3]/td[2]").innerText() );
+		//verify color input
+		String exptColor = page.locator("#ic").getAttribute("Value");
+		if("#00001".equals(exptColor)) {
+			System.out.println("Color is as expected: "+actualColor);
+		}else {
+			System.out.println("Color is no as expected: "+actualColor);
+		}
+		//Verify Color input
+		//page.locator("//input[@id='ic']").click();
+//		Locator element=page.locator("#ic").first();
+//		String actualColor=(String)element.evaluate("e1=> getComputedStyle(e1).color");
+//		String expectedColor="rgb(0, 0, 0)";
+//		if(actualColor.equals(expectedColor)) {
+//			System.out.println("Color is as expected: "+actualColor);
+//		}else {
+//			System.out.println("Color is no as expected: "+actualColor);
+//		}
+		
+
+		//Verify actual address match with expected address
+		
+//				String addressExpected = "              Written by <a href=\"mailto:webmaster@example.com\">Jon Doe</a>.<br>\r\n" + 
+//						"              Visit us at:<br>\r\n" + 
+//						"              Example.com<br>\r\n" + 
+//						"              Box 564, Disneyland<br>\r\n" + 
+//						"              USA" +
+//						"              ";
+//				String actualAddress = page.locator("//address").innerHTML();
+//				if (addressExpected.equals(actualAddress)) 
+//					System.out.println("Address is accurate - Pass");
+//				else
+//					System.out.println("Address is not accurate - FAILED");
+//		//video 
+//		BrowserContext context=browser
+//				.newContext(new Browser.NewContextOptions().setRecordVideoDir(Paths.get("videos/"))); 
+//			Page page;
+//			page = context.newPage();
 		//page.locator("//input[@type='submit'][1]").click();
 		//page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("./src/test/resources/files/PicKeyDown.png")));
 //		Thread.sleep(3000);

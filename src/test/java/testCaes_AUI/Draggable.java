@@ -24,9 +24,13 @@ public class Draggable {
 		System.out.println(page.title());
 		Thread.sleep(2000);
 		page.locator("//a[text()='Selectable']").click();
-		Thread.sleep(1000);
-		page.locator("").click();
-		page.locator("").click();
+		Thread.sleep(3000);
+		//page.locator("//iframe[@class='demo-frame']").click();
+//		page.locator("iframe").click();
+//		//page.click("//iframe[@class='demo-frame']");
+//		Thread.sleep(3000);
+//		page.locator("//ol[@id='selectable']/li[1]").click();
+//		//page.locator("").click();
 		
 		
 //		page.close();

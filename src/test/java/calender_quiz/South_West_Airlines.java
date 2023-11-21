@@ -1,6 +1,7 @@
 package calender_quiz;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
@@ -22,6 +23,9 @@ public class South_West_Airlines {
 		page = browser.newPage();
 	
 		page.navigate("https://www.southwest.com/");
+		
+		ArrayList<String>argument= new ArrayList<>();
+		argument.add("--start-maximized");
 		//Get page title
 		System.out.println( page.title() );
 		page.locator("(//input[@class='input--text'])[2]").fill("PHX");
